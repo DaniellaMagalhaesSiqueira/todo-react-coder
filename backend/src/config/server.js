@@ -1,16 +1,17 @@
-const port = 3003
-
 const bodyParser = require('body-parser')
 const express = require('express')
 const server = express()
-const allowCors = require('./cors')
+const cors = require('cors')
+const port = process.env.PORT || 3001;
 
-server.use(bodyParser.urlencoded({ extended: true }))
+server.use(bodyParser.urlencoded( { extended: true } ))
 server.use(bodyParser.json())
-server.use(allowCors)
+
+server.use(cors({origin: '*'}));
+server.set('secret', 'opensecret');
 
 server.listen(port, function(){
-    console.log(`BACKEND is running on port ${port}.`)
+  console.log(`backend server is running on port ${port}.`)
 })
 
 module.exports = server
